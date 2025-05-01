@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../Images/fevicon.png" type="image/x-icon">
+    <title>Global Trust Bank - Open New Account</title>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ffc107;
+            --text-color: #333;
+            --light-color: #fff;
+            --error-color: #dc3545;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: var(--light-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 86, 179, 0.8), rgba(0, 86, 179, 0.8)), url('https://images.unsplash.com/photo-1601597111158-2fceff292cdc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--light-color);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e0a800;
+        }
+        
+        .account-form {
+            background-color: var(--light-color);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin: -3rem auto 3rem;
+            max-width: 800px;
+            position: relative;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-col {
+            flex: 1;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0,86,179,0.2);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .radio-option input {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+        
+        .checkbox {
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox input {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+        
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn-submit:hover {
+            background-color: #004494;
+        }
+        
+        .error {
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--light-color);
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Sys Bank</div>
+            <nav>
+                <ul>
+                    <li><a href="../Html/Bank_Management_System.html">Home</a></li>
+                    <li><a href="#">Accounts</a></li>
+                    <li><a href="#">Loans</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Open Your New Bank Account</h1>
+            <p>Join millions of satisfied customers with our easy online account opening process. Enjoy competitive rates, digital banking, and premium services.</p>
+            <a href="#account-form" class="btn">Start Application</a>
+        </div>
+    </section>
+    
+    <form id="account-form" class="account-form container">
+        <h2 class="form-title">Account Application Form</h2>
+        
+        <div class="form-group">
+            <h3>Personal Information</h3>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="first-name">First Name*</label>
+                    <input type="text" id="first-name" name="first-name" required>
+                    <div class="error" id="first-name-error">Please enter your first name</div>
+                </div>
+            </div>
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="last-name">Last Name*</label>
+                    <input type="text" id="last-name" name="last-name" required>
+                    <div class="error" id="last-name-error">Please enter your last name</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="dob">Date of Birth*</label>
+                    <input type="datetime-local" id="dob" name="dob" required>
+                    <div class="error" id="dob-error">Please enter your date of birth</div>
+                </div>
+            </div>
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender">
+                        <option value="">Select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                        <option value="prefer-not-to-say">Prefer not to say</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email Address*</label>
+            <input type="email" id="email" name="email" required>
+            <div class="error" id="email-error">Please enter a valid email address</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="phone">Phone Number*</label>
+            <input type="tel" id="phone" name="phone" required>
+            <div class="error" id="phone-error">Please enter a valid phone number</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="address">Residential Address*</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+            <div class="error" id="address-error">Please enter your address</div>
+        </div>
+        
+        <div class="form-group">
+            <h3>Account Details</h3>
+        </div>
+        
+        <div class="form-group">
+            <label>Account Type*</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="savings" name="account-type" value="savings" required>
+                    <label for="savings">Savings Account</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="checking" name="account-type" value="checking">
+                    <label for="checking">Checking Account</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="joint" name="account-type" value="joint">
+                    <label for="joint">Joint Account</label>
+                </div>
+            </div>
+            <div class="error" id="account-type-error">Please select an account type</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="initial-deposit">Initial Deposit Amount (₹)*</label>
+            <input type="number" id="initial-deposit" name="initial-deposit" min="50" required>
+            <div class="error" id="deposit-error">Minimum initial deposit is ₹50</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="debit-card">Debit Card Option</label>
+            <select id="debit-card" name="debit-card">
+                <option value="standard">Standard Card (Free)</option>
+                <option value="premium">Premium Card (₹5/month)</option>
+                <option value="none">No Card</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <div class="checkbox">
+                <input type="checkbox" id="online-banking" name="online-banking">
+                <label for="online-banking">Enable Online Banking</label>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="checkbox">
+                <input type="checkbox" id="mobile-banking" name="mobile-banking" >
+                <label for="mobile-banking">Enable Mobile Banking</label>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="checkbox">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the <a href="#">Terms and Conditions</a>*</label>
+                <div class="error" id="terms-error">You must agree to the terms and conditions</div>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-submit">Submit Application</button>
+    </form>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Security</a>
+                <a href="#">Contact Us</a>
+                <a href="#">FAQ</a>
+            </div>
+            <p>&copy; 2023 Global Trust Bank. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- <script>
+        document.getElementById('account-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let isValid = true;
+            
+            // Reset errors
+            document.querySelectorAll('.error').forEach(el => el.style.display = 'none');
+            
+            // Validate required fields
+            const requiredFields = [
+                'first-name', 'last-name', 'dob', 'email', 
+                'phone', 'address', 'initial-deposit'
+            ];
+            
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    document.getElementById(`${fieldId}-error`).style.display = 'block';
+                    isValid = false;
+                }
+            });
+            
+            // Validate email format
+            const email = document.getElementById('email');
+            if (email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                document.getElementById('email-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate phone number
+            const phone = document.getElementById('phone');
+            if (phone.value && !/^[\d\s\-\(\)]{10,}$/.test(phone.value)) {
+                document.getElementById('phone-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate initial deposit
+            const deposit = document.getElementById('initial-deposit');
+            if (deposit.value && parseFloat(deposit.value) < 50) {
+                document.getElementById('deposit-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate account type selection
+            const accountTypeSelected = document.querySelector('input[name="account-type"]:checked');
+            if (!accountTypeSelected) {
+                document.getElementById('account-type-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate terms checkbox
+            const termsChecked = document.getElementById('terms').checked;
+            if (!termsChecked) {
+                document.getElementById('terms-error').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                alert('Thank you for your application! We will process your request shortly.');
+                this.reset();
+            }
+        });
+    </script> -->
+</body>
+</html>
